@@ -4,3 +4,5 @@ AppData\Local\nvim\init.lua
 {{ if ne .chezmoi.os "linux" }}
 .config/nvim/init.lua
 {{ end }}
+
+README.md
