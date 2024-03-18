@@ -1,0 +1,12 @@
+font:
+  size: 14
+  bold:
+    family: "Intone Mono Nerd Font Mono"
+    style: "Bold"
+  normal:
+    family: "Intone Mono Nerd Font Mono"
+    style: "Medium"
+  italic:
+    family: "Intone Mono Nerd Font Mono"
+    style: "Italic"
+
