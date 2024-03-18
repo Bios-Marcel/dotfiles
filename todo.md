@@ -5,6 +5,6 @@
   * config
   > Keys will follow the same name structure everywhere
   * keys
-* sway (Keep i3 compatibility?)
-  * i3blocks
+* sway
+  * Make it work for both i3 and sway. Done by variables and if else in template
 
