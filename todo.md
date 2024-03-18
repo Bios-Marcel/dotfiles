@@ -1,5 +1,3 @@
-* Terminal
-  * WezTerm / Alacritty
 * git
 * ssh
   * config

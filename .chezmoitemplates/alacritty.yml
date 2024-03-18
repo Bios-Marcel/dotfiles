@@ -1,12 +1,25 @@
 font:
   size: 14
   bold:
-    family: "Intone Mono Nerd Font Mono"
+    family: "IntoneMono Nerd Font Mono"
     style: "Bold"
   normal:
-    family: "Intone Mono Nerd Font Mono"
+    family: "IntoneMono Nerd Font Mono"
     style: "Medium"
   italic:
-    family: "Intone Mono Nerd Font Mono"
+    family: "IntoneMono Nerd Font Mono"
     style: "Italic"
 
+{{ if eq .chezmoi.os "windows" }}
+shell:
+  args:
+    - "-WorkingDirectory"
+    - "C:\\Users\\marce"
+  program: "C:\\Users\\marce\\scoop\\apps\\pwsh\\current\\pwsh.EXE"
+{{ end}}
+
+window:
+  startup_mode: maximized
+
+debug:
+  log_level: "Off"

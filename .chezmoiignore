@@ -1,5 +1,8 @@
 {{ if ne .chezmoi.os "windows" }}
 AppData\Local\nvim\init.lua
+
+AppData\Roaming\alacritty\alacritty.yml
+AppData\Roaming\alacritty\alacritty.toml
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
