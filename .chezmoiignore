@@ -1,8 +1,15 @@
 {{ if ne .chezmoi.os "windows" }}
 AppData\Local\nvim\init.lua
 {{ end }}
+
 {{ if ne .chezmoi.os "linux" }}
 .config/nvim/init.lua
+
+.config/alacritty/alacritty.yml
+.config/alacritty/alacritty.toml
+
+.config/i3/config
+.config/i3blocks/config
 {{ end }}
 
 README.md
