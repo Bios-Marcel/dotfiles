@@ -1,0 +1,9 @@
+[battery]
+command=echo "$(cat /sys/class/power_supply/BAT0/capacity)%"
+interval=60
+
+[time]
+instance=de
+TZ=Europe/Berlin
+command=date +"%d-%m-%y %T"
+interval=5
