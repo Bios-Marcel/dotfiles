@@ -305,7 +305,7 @@ require('telescope').setup {
       },
     },
     preview = {
-      filesize_limit = 0.1,      --0.5 MB
+      filesize_limit = 0.5, --0.5 MB
     },
     mappings = {
       i = {
