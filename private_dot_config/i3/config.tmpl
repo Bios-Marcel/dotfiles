@@ -49,8 +49,11 @@ input "2:8:AlpsPS/2_ALPS_DualPoint_Stick" {
     pointer_accel 0.8
 }{{ end }}
 
-input * {
+input type:keyboard {
     xkb_layout "de"
+}
+
+input type:touchpad {
     # The thinkpad touchpad sucks, i keep accidentally tapping and holding.
     tap disabled
     middle_emulation disabled
