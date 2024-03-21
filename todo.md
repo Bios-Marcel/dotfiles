@@ -1,4 +1,3 @@
-* git
 * ssh
   * config
   > Keys will follow the same name structure everywhere
