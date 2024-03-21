@@ -39,6 +39,12 @@ exec swayidle -w \
 
 # Prevent screenlock during slack call
 for_window [title="Huddle.*"] inhibit_idle open
+for_window [title="Zoom Meeting"] inhibit_idle open
+
+### Window configuration
+
+# The notifications are just called "zoom" and open as tiles, which sucks.
+for_window [title="zoom"] floating enable
 
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
