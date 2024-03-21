@@ -19,6 +19,7 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $lock_cmd swaylock -f -c 000000
 
 {{ if lookPath "pw-volume" }}
 set $volume_mute_cmd pw-volume mute toggle
@@ -43,9 +44,9 @@ output * bg ~/Pictures/background.jpg fill
 
 ### Idle configuration
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 '$lock_cmd' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep '$lock_cmd'
 
 # Prevent screenlock during slack call
 for_window [title="Huddle.*"] inhibit_idle open
@@ -102,7 +103,7 @@ input type:touchpad {
     # Kill focused window
     bindsym $mod+q kill
 
-    bindsym $mod+m exec swaylock
+    bindsym $mod+m exec $lock_cmd
 
     # Start your launcher
     bindsym $mod+d exec $menu
