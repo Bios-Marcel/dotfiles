@@ -21,6 +21,7 @@ set $term alacritty
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $lock_cmd swaylock -f -c 000000
 
+# Attempt to support a pulse-free setup.
 {{ if lookPath "pw-volume" }}
 set $volume_mute_cmd pw-volume mute toggle
 set $volume_up_cmd pw-volume change "+5%"
@@ -30,6 +31,10 @@ set $volume_mute_cmd pactl set-sink-mute "$(pactl info | rg "Default Sink: (.*)"
 set $volume_up_cmd pactl set-sink-volume "$(pactl info | rg "Default Sink: (.*)" -r '$1')" "+5%"
 set $volume_down_cmd pactl set-sink-volume "$(pactl info | rg "Default Sink: (.*)" -r '$1')" "-5%"
 {{ end }}
+
+set $audio_play_pause_cmd playerctl play-pause
+set $audio_next_cmd playerctl next
+set $audio_previous_cmd playerctl previous
 
 ### Output configuration
 #
@@ -92,6 +97,12 @@ input type:touchpad {
     bindsym --locked XF86AudioLowerVolume exec $volume_down_cmd
     ## TODO
     # bindsym XF86AudioMicMute exec $mic_mute
+
+    # Media control
+    bindsym --locked XF86AudioPlay exec $audio_play_pause_cmd
+    bindsym --locked XF86AudioPause exec $audio_play_pause_cmd
+    bindsym --locked XF86AudioNext exec $audio_next_cmd
+    bindsym --locked XF86AudioPrev exec $audio_previous_cmd
 
     # brightness
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set +10%
