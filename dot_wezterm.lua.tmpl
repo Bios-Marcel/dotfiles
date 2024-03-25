@@ -1,0 +1,13 @@
+local wezterm = require 'wezterm'
+local config = {
+    {{ if eq .chezmoi.os "windows" }}
+    default_prog = { 'pwsh.exe' },
+    {{ end }}
+    font = wezterm.font('IntoneMono Nerd Font Mono'),
+    font_size = 14.0,
+    colors = {
+        background = '#171717',
+    },
+}
+return config
+
