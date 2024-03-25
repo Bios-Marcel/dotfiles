@@ -19,7 +19,24 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $lock_cmd swaylock -f -c 000000
+# We use swaylock-effects here, but the binary name is the same.
+set $lock_cmd swaylock \
+    --image ~/Pictures/background.jpg \
+    --clock \
+    --indicator \
+    --indicator-radius 100 \
+    --indicator-thickness 7 \
+    --effect-blur 7x5 \
+    --effect-vignette 0.5:0.5 \
+    --ring-color bb00cc \
+    --key-hl-color 880033 \
+    --line-color 00000000 \
+    --inside-color 00000088 \
+    --separator-color 00000000 \
+    --grace 5 \
+    --grace-no-mouse \
+    --grace-no-touch \
+    --fade-in 0.5
 
 # Attempt to support a pulse-free setup.
 {{ if lookPath "pw-volume" }}
@@ -49,9 +66,9 @@ output * bg ~/Pictures/background.jpg fill
 
 ### Idle configuration
 exec swayidle -w \
-         timeout 300 '$lock_cmd' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep '$lock_cmd'
+    timeout 300 '$lock_cmd' \
+    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep '$lock_cmd'
 
 # Prevent screenlock during slack call
 for_window [title="Huddle.*"] inhibit_idle open
