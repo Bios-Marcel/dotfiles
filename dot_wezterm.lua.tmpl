@@ -3,11 +3,18 @@ local config = {
     {{ if eq .chezmoi.os "windows" }}
     default_prog = { 'pwsh.exe' },
     {{ end }}
+
     font = wezterm.font('IntoneMono Nerd Font Mono'),
     font_size = 14.0,
+
+    tab_bar_at_bottom = true,
+    use_fancy_tab_bar = false,
+    tab_max_width = 32,
+
     colors = {
         background = '#171717',
     },
 }
+
 return config
 
