@@ -6,6 +6,7 @@ AppData\*
 .config/nvim*
 .config/alacritty*
 .config/i3*
+.config/mako*
 {{ end }}
 
 README.md
