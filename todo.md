@@ -6,5 +6,4 @@
   * Make it work for both i3 and sway. Done by variables and if else in template
   * pipewire / pulse
     * ~volume up, down and toggle~
-    * pause, play, next, previous (playerctl?)
 
