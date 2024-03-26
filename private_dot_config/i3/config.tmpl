@@ -279,6 +279,8 @@ mode "$screenshot" {
 
 bindsym $mod+Print mode "$screenshot"
 
+client.focused #CCCCCC #CCCCCC #222222 #FF0000 #CCCCCC
+
 #
 # Status Bar:
 #
@@ -291,7 +293,8 @@ bar {
     colors {
         statusline #ffffff
         background #323232
-        inactive_workspace #000000 #000000 #FFFFFF
+        inactive_workspace #222222 #222222 #CCCCCC
+        focused_workspace #CCCCCC #CCCCCC #222222
     }
 }
 
