@@ -4,7 +4,71 @@ local config = {
     default_prog = { 'pwsh.exe' },
     {{ end }}
 
-    font = wezterm.font('IntoneMono Nerd Font Mono'),
+    font_rules = {
+        {
+            intensity = 'Normal',
+            italic = false,
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'IntoneMono Nerd Font Mono',
+                    weight = 'Regular',
+                },
+            },
+        },
+        {
+            intensity = 'Normal',
+            italic = true,
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'IntoneMono Nerd Font Mono',
+                    weight = 'Regular',
+                    italic = true,
+                },
+            },
+        },
+        {
+            intensity = 'Half',
+            italic = false,
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'IntoneMono Nerd Font Mono',
+                    weight = 'Medium',
+                },
+            },
+        },
+        {
+            intensity = 'Half',
+            italic = true,
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'IntoneMono Nerd Font Mono',
+                    weight = 'Medium',
+                    italic = true,
+                },
+            },
+        },
+        {
+            intensity = 'Bold',
+            italic = false,
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'IntoneMono Nerd Font Mono',
+                    weight = 'Bold',
+                },
+            },
+        },
+        {
+            intensity = 'Bold',
+            italic = true,
+            font = wezterm.font_with_fallback {
+                {
+                    family = 'IntoneMono Nerd Font Mono',
+                    weight = 'Bold',
+                    italic = true,
+                },
+            },
+        },
+    },
     font_size = 14.0,
 
     tab_bar_at_bottom = true,
