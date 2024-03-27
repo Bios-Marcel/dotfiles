@@ -1,5 +1,17 @@
+anchor=top-center
 background-color=#222222FF
 text-color=#CCCCCCFF
 border-size=1
 border-color=#CCCCCCFF
 padding=5,10,5,10
+# Display even above fullscreen, even though the default "top" might do the
+# same depending on the display manager.
+layer=overlay
+font=monospace 14
+
+# Show up to 10 notifications, for 3 minutes each, ignoring custom timeouts
+# defined by notificaitons.
+
+default-timeout=180000
+ignore-timeout=1
+max-visible=10

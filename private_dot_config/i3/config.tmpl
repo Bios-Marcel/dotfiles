@@ -276,9 +276,16 @@ mode "$screenshot" {
     bindsym Escape mode "default"
     bindsym $mod+Print mode "default"
 }
-
 bindsym $mod+Print mode "$screenshot"
 
+#
+# Notifications
+#
+bindsym Ctrl+Shift+h exec makoctl dismiss --all
+
+#
+# Theming
+#
 client.focused #CCCCCC #CCCCCC #222222 #FF0000 #CCCCCC
 
 #
