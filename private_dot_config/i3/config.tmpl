@@ -57,6 +57,12 @@ set $audio_previous_cmd playerctl previous
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 output * bg ~/Pictures/background.jpg fill
+
+{{ if not (contains "thinkpad" .chezmoi.hostname) }}
+output HDMI-A-2 pos 0 0
+output eDP-1 pos 2560 0
+{{ end }}
+
 #
 # Example configuration:
 #
