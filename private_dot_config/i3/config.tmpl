@@ -301,12 +301,23 @@ bindsym Ctrl+Shift+h exec makoctl dismiss --all
 #
 client.focused #CCCCCC #CCCCCC #222222 #CCCCCC #CCCCCC
 
+# Group of tricks to remove the titel bar completly
+default_border none
+default_floating_border none
+font pango:monospace 0
+# Keep top border with 1 pixel
+titlebar_padding 1
+titlebar_border_thickness 0
+
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    # We used a fontsize hack to remove the title bar, so we need to respecify
+    # our fontsize here.
+    font pango:monospace 10
 
     status_command i3blocks
 
