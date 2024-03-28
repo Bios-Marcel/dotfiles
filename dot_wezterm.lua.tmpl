@@ -75,7 +75,17 @@ local config = {
     use_fancy_tab_bar = false,
     tab_max_width = 32,
 
-    color_scheme = "Catppuccin Macchiato"
+    color_scheme = "Catppuccin Macchiato",
+
+    mouse_bindings = {
+        -- While wezterm can open links via letclick by default, I am used to
+        -- ctrl+leftclick, so we allow both.
+        {
+            event = { Up = { streak = 1, button = 'Left' } },
+            mods = 'CTRL',
+            action = wezterm.action.OpenLinkAtMouseCursor,
+        },
+    },
 }
 
 return config
