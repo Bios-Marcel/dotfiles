@@ -1,3 +1,7 @@
+[powerprofile]
+command=powerprofilesctl get && while read button; do echo "$(~/.local/bin/cycleprofile.sh)"; done
+interval=persist
+
 [battery]
 command=echo "$(cat /sys/class/power_supply/BAT0/capacity)%"
 interval=60

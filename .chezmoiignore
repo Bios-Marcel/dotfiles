@@ -3,6 +3,7 @@ AppData\*
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
+.local/bin*
 .config/nvim*
 .config/alacritty*
 .config/i3*
