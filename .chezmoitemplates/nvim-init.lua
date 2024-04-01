@@ -151,7 +151,13 @@ require('lazy').setup({
   { 'folke/neoconf.nvim' },
 
   -- Debugger
-  { 'mfussenegger/nvim-dap' },
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+    },
+  },
+
   -- Debugger Adapter for Golang
   { 'leoluz/nvim-dap-go' },
   -- Debugger UI
