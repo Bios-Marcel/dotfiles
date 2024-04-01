@@ -123,19 +123,21 @@ require('lazy').setup({
     version = "*",
     opts = {},
     config = function()
-      -- place this in one of your configuration file(s)
       local hop = require('hop')
       local directions = require('hop.hint').HintDirection
-      vim.keymap.set('', 'f', function()
+
+      -- We only bind this to normal mode for now, as I don't want to affect
+      -- actions such as delete.
+      vim.keymap.set('n', 'f', function()
         hop.hint_char1({ direction = directions.AFTER_CURSOR })
       end, { remap = true })
-      vim.keymap.set('', 'F', function()
+      vim.keymap.set('n', 'F', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR })
       end, { remap = true })
-      vim.keymap.set('', 't', function()
+      vim.keymap.set('n', 't', function()
         hop.hint_char1({ direction = directions.AFTER_CURSOR, hint_offset = -1 })
       end, { remap = true })
-      vim.keymap.set('', 'T', function()
+      vim.keymap.set('n', 'T', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 })
       end, { remap = true })
       hop.setup()
