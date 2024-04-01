@@ -4,4 +4,8 @@
   * keys
 * sway
   * Make it work for both i3 and sway. Done by variables and if else in template
+* nvim
+  * https://neovimcraft.com/plugin/NMAC427/guess-indent.nvim
+    > sleuth pisses me off in certain scenarios. I wantt o be able to pre-define
+    > certain rules. Maybe guess can do it?
 
