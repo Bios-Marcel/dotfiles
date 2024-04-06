@@ -215,7 +215,14 @@ require('lazy').setup({
       -- C reimplementation of fzf core algorithm. This is built by nvim.
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
+        build = function()
+          if vim.fn.executable 'cmake' then
+            return
+            'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+          end
+
+          return 'make'
+        end,
         cond = function()
           return vim.fn.executable 'make' == 1 or vim.fn.executable 'cmake' == 1
         end,
@@ -346,7 +353,7 @@ require('telescope').setup {
 }
 
 -- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+require('telescope').load_extension('fzf')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
