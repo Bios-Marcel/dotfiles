@@ -629,6 +629,13 @@ cmp.setup {
   },
   completion = {
     completeopt = 'noinsert',
+    autocomplete = {
+      cmp.TriggerEvent.TextChanged,
+      -- By default, reentering insert mode doesn't open the autocomplete, which
+      -- is super annoying.
+      cmp.TriggerEvent.InsertEnter,
+    },
+    keyword_length = 0,
   },
   view       = {
     docs = {
@@ -644,7 +651,7 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<M-y>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
