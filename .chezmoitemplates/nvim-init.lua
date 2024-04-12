@@ -508,9 +508,6 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- Autoformat on save
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
-
 ---------------------------------------
 -- LSP Schtuff
 ---------------------------------------
@@ -712,18 +709,26 @@ local golang_organize_imports = function(bufnr, isPreflight)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspFormatting", {}),
+  group = vim.api.nvim_create_augroup("LspActionsOnWrite", {}),
   callback = function(args)
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("LspFormat", {}),
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+
+    -- The go language server does not organise imports on format.
     if client.name == "gopls" then
       -- hack: Preflight async request to gopls, which can prevent blocking when save buffer on first time opened
       golang_organize_imports(bufnr, true)
 
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
-        group = vim.api.nvim_create_augroup("LspGolangOrganizeImports." .. bufnr, {}),
+        group = vim.api.nvim_create_augroup("LspGolangOrganizeImports" .. bufnr, {}),
         callback = function()
           golang_organize_imports(bufnr)
         end,
