@@ -721,6 +721,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end,
     })
 
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      group = vim.api.nvim_create_augroup("update_quickfixlist", {}),
+      callback = function()
+        vim.diagnostic.setqflist()
+      end,
+    })
+
     -- The go language server does not organise imports on format.
     if client.name == "gopls" then
       -- hack: Preflight async request to gopls, which can prevent blocking when save buffer on first time opened
