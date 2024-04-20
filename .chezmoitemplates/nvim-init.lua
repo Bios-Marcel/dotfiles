@@ -681,12 +681,6 @@ cmp.setup {
 
 vim.cmd("colorscheme catppuccin-macchiato")
 
--- Basic transparency; Doesn't do floats rn.
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
--- Alternatively use 'xiyaowong/transparent.nvim'
-
 local golang_organize_imports = function(bufnr, isPreflight)
   local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding(bufnr))
   params.context = { only = { "source.organizeImports" } }
