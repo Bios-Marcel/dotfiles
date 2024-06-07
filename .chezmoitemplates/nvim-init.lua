@@ -349,9 +349,6 @@ require('telescope').setup {
   },
 }
 
--- Enable telescope fzf native, if installed
-require('telescope').load_extension('fzf')
-
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -743,3 +740,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.keymap.set('n', '<leader>er', function()
   vim.api.nvim_input('oif err != nil {<cr><tab>return err<cr>}<esc>b')
 end)
+
+---
+--- Shaky stuff we do last, so we can load as much as possible.
+---
+
+-- Enable telescope fzf native, if installed
+require('telescope').load_extension('fzf')
