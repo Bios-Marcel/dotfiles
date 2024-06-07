@@ -1,15 +1,13 @@
-[url "git@github.com:enercity"]
-	insteadOf = https://github.com/enercity
 [user]
 	email = {{ .email | quote }}
 	name = Marcel Schramm
 [core]
 	autocrlf = input
 	eol = lf
+{{ if eq .chezmoi.hostname "NB-00724" }}	sshCommand = ssh -F C:/Users/Schramm/.ssh/config{{end}}
 [pull]
 	rebase = true
 [push]
 	autoSetupRemote = true
 [diff]
 	colorMoved = zebra
-
