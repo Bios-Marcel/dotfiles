@@ -114,10 +114,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Theme
   { 'catppuccin/nvim' },
-
-  -- Basic git integration via 'G' command
-  { 'tpope/vim-fugitive' },
-
   {
     'smoka7/hop.nvim',
     version = "*",
