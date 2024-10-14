@@ -556,14 +556,7 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 --  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
-  gopls = {
-    gopls = {
-      gofumpt = true,
-    },
-  },
-  zls = {},
   marksman = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -572,12 +565,27 @@ local servers = {
   },
 }
 
+if vim.fn.executable "zig" == 1 then
+  servers.zls = {}
+end
+
+if vim.fn.executable "java" == 1 then
+  servers.jdtls = {}
+end
+
+if vim.fn.executable "go" == 1 then
+  servers.gopls = {
+    gopls = {
+      gofumpt = true,
+    },
+  }
+end
+
 if is_windows then
   servers.powershell_es = {}
 end
 
 if vim.fn.executable "node" == 1 then
-  servers.ts_ls = {}
   servers.cssls = {}
   servers.html = {}
 end
