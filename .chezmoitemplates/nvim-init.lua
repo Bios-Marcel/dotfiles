@@ -561,10 +561,8 @@ local servers = {
       gofumpt = true,
     },
   },
-  tsserver = {},
   zls = {},
   marksman = {},
-  cssls = {},
 
   lua_ls = {
     Lua = {
@@ -578,6 +576,11 @@ if is_windows then
   servers.powershell_es = {}
 end
 
+if vim.fn.executable "node" == 1 then
+  servers.ts_ls = {}
+  servers.cssls = {}
+  servers.html = {}
+end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
