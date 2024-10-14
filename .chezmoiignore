@@ -4,10 +4,13 @@ AppData\*
 
 {{ if ne .chezmoi.os "linux" }}
 .local/bin*
-.config/nvim*
 .config/alacritty*
 .config/i3*
 .config/mako*
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.config/nvim*
 {{ end }}
 
 README.md
