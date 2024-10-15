@@ -1,4 +1,6 @@
 local wezterm = require 'wezterm'
+local dark_theme = "Catppuccin Macchiato";
+local light_theme = "Catppuccin Latte";
 local config = {
     {{ if eq .chezmoi.os "windows" }}
     default_prog = { 'pwsh.exe' },
@@ -81,8 +83,27 @@ local config = {
         bottom = 0,
     },
 
-    color_scheme = "Catppuccin Macchiato",
+    color_scheme = dark_theme,
 
+    keys = {
+        -- Switch Theme on Ctrl+Alt+Shift+T between dark and light.
+        -- This action is not persistent though. We always start with dark.
+        {
+            key = 't',
+            mods = 'CTRL|ALT|SHIFT',
+            action = wezterm.action_callback(
+                function(win, pane)
+                    local overrides = win:get_config_overrides()
+                    if not overrides or overrides.color_scheme == dark_theme
+                    then
+                        win:set_config_overrides { color_scheme = light_theme }
+                    else
+                        win:set_config_overrides { color_scheme = dark_theme }
+                    end
+                end
+            ),
+        },
+    },
     mouse_bindings = {
         -- While wezterm can open links via letclick by default, I am used to
         -- ctrl+leftclick, so we allow both.
