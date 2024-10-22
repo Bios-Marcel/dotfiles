@@ -111,8 +111,13 @@ input type:keyboard {
 {{ end }}
 
 input type:touchpad {
+    {{ if contains "thinkpad" .chezmoi.hostname }}
     # The thinkpad touchpad sucks, i keep accidentally tapping and holding.
     tap disabled
+    {{ else }}
+    tap enabled
+    {{ end }}
+
     middle_emulation disabled
     dwt enabled
     natural_scroll enabled
