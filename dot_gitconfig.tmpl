@@ -7,7 +7,15 @@
 {{ if eq .chezmoi.hostname "NB-00724" }}	sshCommand = ssh -F C:/Users/Schramm/.ssh/config{{end}}
 [pull]
 	rebase = true
+[rebase]
+	autostash = true
+[merge]
+	autostash = true
 [push]
 	autoSetupRemote = true
 [diff]
 	colorMoved = zebra
+[alias]
+	a = add
+	c = commit
+	ca = commit --amend
