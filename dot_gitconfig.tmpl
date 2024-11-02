@@ -4,7 +4,7 @@
 [core]
 	autocrlf = input
 	eol = lf
-{{ if eq .chezmoi.hostname "NB-00724" }}	sshCommand = ssh -F C:/Users/Schramm/.ssh/config{{end}}
+{{ if eq .chezmoi.os "windows" }}	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe -F {{ .chezmoi.homeDir }}/.ssh/config{{ end}}
 [pull]
 	rebase = true
 [rebase]
