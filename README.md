@@ -23,7 +23,7 @@ chezmoi apply
 ### Data
 
 Default data is saved in [.chezmoi.toml](/.chezmoidata.toml). Override it with
-`[data]` section in ``~/.config/chezmoiz/chezmoi.toml`.
+`[data]` section in ``~/.config/chezmoi/chezmoi.toml`.
 
 ### Secret management
 
