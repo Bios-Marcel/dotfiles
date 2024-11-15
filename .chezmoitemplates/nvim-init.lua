@@ -2,9 +2,9 @@
 -- Util
 ---------------------------------------
 
-local is_linux = vim.loop.os_uname().sysname == 'Linux'
+local is_linux = vim.uv.os_uname().sysname == 'Linux'
 -- If both linux and windows are true, it is WSL
-local is_windows = vim.loop.os_gethostname():match(".+-win", 1) ~= nil and not is_linux
+local is_windows = vim.uv.os_gethostname():match(".+-win", 1) ~= nil and not is_linux
 
 
 ---------------------------------------
@@ -175,10 +175,33 @@ require('lazy').setup({
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
     },
+  },
+
+  -- Make working on the Neovim config doable.
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta", lazy = true },
+  -- optional cmp completion source for require statements and module annotations
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
   },
 
   {
@@ -196,7 +219,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',                        opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -591,9 +614,6 @@ if vim.fn.executable "node" == 1 then
   servers.cssls = {}
   servers.html = {}
 end
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
