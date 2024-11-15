@@ -50,10 +50,20 @@ scoop install wezterm nu
 scoop install neovim python nodejs openjdk23 gradle maven gcc cmake
 
 # Java dev env
-scoop install idea visualvm jmc tortoisesvn openjdk21 openjdk22
+scoop install idea visualvm openjdk21 openjdk22
 
 # MISC
 scoop install spotify sharex presenterm
 
-# vi: ft=powershell
+# Config only for work
+if ("$env:COMPUTERNAME" -eq "NB-00724")
+{
+	[Environment]::SetEnvironmentVariable('HOME','C:\Users\Schramm',[System.EnvironmentVariableTarget]::User)
 
+	# Java dev env
+	scoop install jmc tortoisesvn
+	[Environment]::SetEnvironmentVariable('SVN_EXPERIMENTAL_COMMANDS','shelf3',[System.EnvironmentVariableTarget]::User)
+	[Environment]::SetEnvironmentVariable('SVN_EDIETOR','nvim',[System.EnvironmentVariableTarget]::User)
+}
+
+# vi: ft=powershell
