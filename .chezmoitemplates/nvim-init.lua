@@ -27,7 +27,7 @@ vim.opt.ttyfast = true
 vim.opt.mouse = 'a'
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 999
+vim.opt.scrolloff = 2
 
 -- Sets how neovim will display certain whitespace in the editor.
 vim.opt.list = true
