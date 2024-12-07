@@ -590,6 +590,10 @@ local servers = {
   },
 }
 
+if vim.fn.executable "cargo" == 1 then
+  servers.rust_analyzer = {}
+end
+
 if vim.fn.executable "zig" == 1 then
   servers.zls = {}
 end
