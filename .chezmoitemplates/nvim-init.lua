@@ -616,6 +616,7 @@ end
 
 if vim.fn.executable "node" == 1 then
   servers.cssls = {}
+  servers.ts_ls = {}
   servers.html = {}
 end
 
