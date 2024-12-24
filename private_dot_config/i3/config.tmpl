@@ -109,6 +109,10 @@ input type:keyboard {
 }
 {{ end }}
 
+input type:keyboard {
+    xkb_options caps:none
+}
+
 input type:touchpad {
     {{ if contains "thinkpad" .chezmoi.hostname }}
     # The thinkpad touchpad sucks, i keep accidentally tapping and holding.
