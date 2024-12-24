@@ -2,6 +2,8 @@ local wezterm = require 'wezterm'
 local dark_theme = "Catppuccin Macchiato";
 local light_theme = "Catppuccin Latte";
 local config = {
+    front_end = "WebGpu",
+    enable_wayland = false,
     {{ if eq .chezmoi.os "windows" }}
     default_prog = { 'pwsh.exe' },
     {{ end }}
