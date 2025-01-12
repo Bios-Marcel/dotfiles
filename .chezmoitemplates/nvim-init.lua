@@ -784,6 +784,6 @@ end)
 
 -- Enable telescope fzf native, if installed
 -- But on windows it does not work for now, unsure why.
-if is_linux then
-  require('telescope').load_extension('fzf')
-end
+-- if is_linux then
+--   require('telescope').load_extension('fzf')
+-- end
