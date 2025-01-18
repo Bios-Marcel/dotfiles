@@ -79,6 +79,16 @@ end
 -- Yank to system clipboard; This increases startup time a lot in WSL.
 -- vim.opt.clipboard = 'unnamedplus'
 
+-- Highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = "IncSearch", -- Highlight group
+      timeout = 200,         -- Duration in milliseconds
+    })
+  end,
+})
+
 ---------------------------------------
 -- Editing end
 ---------------------------------------
