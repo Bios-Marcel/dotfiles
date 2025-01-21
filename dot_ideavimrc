@@ -9,6 +9,9 @@ set scrolloff=2
 set number relativenumber
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
+set idearefactormode=keep
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
@@ -18,17 +21,25 @@ map Q gq
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 
-map gr <Action>(ShowUsages)
-map gd <Action>(GotoDeclaration)
+nmap gr <Action>(ShowUsages)
+nmap gd <Action>(GotoDeclaration)
+nmap gi <Action>(GotoImplementation)
 
-map <leader>sg <Action>(TextSearchAction)
-map <leader>sf <Action>(GotoFile)
-map <leader>ds <Action>(FileStructurePopup)
+nmap <c-o> <Action>(Back)
+nmap <c-i> <Action>(Forward)
 
-map <leader>rn <Action>(RenameElement)
-map <leader>cs <Action>(ChangeSignature)
-map <leader>ec <Action>(IntroduceConstant)
-map <leader>ev <Action>(IntroduceVariable)
+nmap <C-S-k> <Action>(ShowHoverInfo)
 
-map <leader>rr <Action>(Debugger.ReloadFile)
-map <leader>rd <Action>(Debug)
+nmap <leader>sg <Action>(TextSearchAction)
+nmap <leader>sf <Action>(GotoFile)
+nmap <leader>ds <Action>(FileStructurePopup)
+
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>cs <Action>(ChangeSignature)
+nmap <leader>ec <Action>(IntroduceConstant)
+nmap <leader>ev <Action>(IntroduceVariable)
+vmap <leader>em <Action>(ExtractMethod)
+
+nmap <leader>rr <Action>(Debugger.ReloadFile)
+nmap <leader>rd <Action>(Debug)
+
