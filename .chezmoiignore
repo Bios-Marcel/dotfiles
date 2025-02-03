@@ -1,5 +1,6 @@
 {{ if ne .chezmoi.os "windows" }}
 AppData*
+setup.ps1
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
