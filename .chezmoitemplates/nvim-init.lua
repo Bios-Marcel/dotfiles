@@ -600,6 +600,10 @@ local servers = {
   },
 }
 
+if vim.fn.executable "odin" == 1 then
+  servers.ols = {}
+end
+
 if vim.fn.executable "cargo" == 1 then
   servers.rust_analyzer = {}
 end
