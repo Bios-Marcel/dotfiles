@@ -88,6 +88,16 @@ local config = {
     color_scheme = dark_theme,
 
     keys = {
+        {{ if eq .chezmoi.os "windows" }}
+        {
+            key = " ",
+            mods = "CTRL",
+            action = wezterm.action.SendKey({
+                key = " ",
+                mods = "CTRL",
+            }),
+        },
+        {{end}}
         -- Switch Theme on Ctrl+Alt+Shift+T between dark and light.
         -- This action is not persistent though. We always start with dark.
         {
