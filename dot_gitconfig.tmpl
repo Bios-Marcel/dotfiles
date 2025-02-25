@@ -5,16 +5,27 @@
 	autocrlf = input
 	eol = lf
 {{ if eq .chezmoi.os "windows" }}	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe -F {{ .chezmoi.homeDir }}/.ssh/config{{ end}}
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[init]
+	defaultBranch = master
 [pull]
 	rebase = true
+[fetch]
+	prune = true
+	pruneTags = true
 [rebase]
 	autostash = true
+	updateRefs = true
 [merge]
 	autostash = true
 [push]
 	autoSetupRemote = true
 [diff]
 	colorMoved = zebra
+	mnemonicPrefix = true
 [alias]
 	a = add
 	c = commit
