@@ -21,6 +21,8 @@ map Q gq
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 
+imap <C-v> <Action>($Paste)
+
 nmap gr <Action>(ShowUsages)
 nmap gd <Action>(GotoDeclaration)
 nmap gi <Action>(GotoImplementation)
@@ -36,9 +38,12 @@ nmap <leader>ds <Action>(FileStructurePopup)
 
 nmap <leader>rn <Action>(RenameElement)
 nmap <leader>cs <Action>(ChangeSignature)
+vmap <leader>ec <Action>(IntroduceConstant)
 nmap <leader>ec <Action>(IntroduceConstant)
+vmap <leader>ev <Action>(IntroduceVariable)
 nmap <leader>ev <Action>(IntroduceVariable)
 vmap <leader>em <Action>(ExtractMethod)
+nmap <leader>em <Action>(ExtractMethod)
 
 nmap <leader>rr <Action>(Debugger.ReloadFile)
 nmap <leader>rd <Action>(Debug)
