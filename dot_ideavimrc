@@ -22,6 +22,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 
 imap <C-v> <Action>($Paste)
+imap <C-S-v> <Action>($Paste)
+map <C-f> <Action>(Replace)
 
 nmap gr <Action>(ShowUsages)
 nmap gd <Action>(GotoDeclaration)
@@ -44,7 +46,9 @@ vmap <leader>ev <Action>(IntroduceVariable)
 nmap <leader>ev <Action>(IntroduceVariable)
 vmap <leader>em <Action>(ExtractMethod)
 nmap <leader>em <Action>(ExtractMethod)
+nmap <leader>iv <Action>(Inline)
 
 nmap <leader>rr <Action>(Debugger.ReloadFile)
 nmap <leader>rd <Action>(Debug)
+
 
