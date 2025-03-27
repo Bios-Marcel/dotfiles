@@ -48,6 +48,7 @@ vim.opt.splitright = true
 -- Visualise 80 and 120 character limit
 vim.opt.colorcolumn = '+1,+41'
 vim.opt.textwidth = 80
+vim.opt.formatoptions:remove { "t" }
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
@@ -153,9 +154,6 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth' },
 
-  -- Project Local Configuration
-  { 'folke/neoconf.nvim' },
-
   -- Debugger
   {
     'mfussenegger/nvim-dap',
@@ -170,21 +168,12 @@ require('lazy').setup({
   { 'rcarriga/nvim-dap-ui' },
 
   -- Highlight selected word in visual space, not the whole file.
-  { 'tzachar/local-highlight.nvim' },
-
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
-  {
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+  { 
+    'tzachar/local-highlight.nvim',
+    opts = {
+      animate = {
+        enabled = false,
+      },
     },
   },
 
@@ -202,9 +191,15 @@ require('lazy').setup({
   },
   -- optional `vim.uv` typings
   { "Bilal2453/luvit-meta", lazy = true },
-  -- optional cmp completion source for require statements and module annotations
+
+  { 
+    'j-hui/fidget.nvim', 
+    opts = {},
+  },
+
   {
-    "hrsh7th/nvim-cmp",
+    -- Autocompletion
+    'hrsh7th/nvim-cmp',
     opts = function(_, opts)
       opts.sources = opts.sources or {}
       table.insert(opts.sources, {
@@ -212,11 +207,6 @@ require('lazy').setup({
         group_index = 0, -- set group index to 0 to skip loading LuaLS completions
       })
     end,
-  },
-
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
@@ -229,7 +219,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',                        opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -488,7 +478,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagno
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local lsp_attach = function(bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -537,50 +527,6 @@ end
 -- LSP Schtuff
 ---------------------------------------
 
-require("neoconf").setup({
-  -- name of the local settings files
-  local_settings = ".neoconf.json",
-  -- import existing settings from other plugins
-  import = {
-    vscode = true, -- local .vscode/settings.json
-    coc = false,   -- global/local coc-settings.json
-    nlsp = true,   -- global/local nlsp-settings.nvim json settings
-  },
-  -- send new configuration to lsp clients when changing json settings
-  live_reload = true,
-  -- set the filetype to jsonc for settings files, so you can use comments
-  -- make sure you have the jsonc treesitter parser installed!
-  filetype_jsonc = true,
-  plugins = {
-    -- configures lsp clients with settings in the following order:
-    -- - lua settings passed in lspconfig setup
-    -- - global json settings
-    -- - local json settings
-    lspconfig = {
-      enabled = true,
-    },
-    -- configures jsonls to get completion in .nvim.settings.json files
-    jsonls = {
-      enabled = true,
-      -- only show completion in json settings for configured lsp servers
-      configured_servers_only = true,
-    },
-    -- configures lua_ls to get completion of lspconfig server settings
-    lua_ls = {
-      -- by default, lua_ls annotations are only enabled in your neovim config directory
-      enabled_for_neovim_config = true,
-      -- explicitely enable adding annotations. Mostly relevant to put in your local .nvim.settings.json file
-      enabled = false,
-    },
-  },
-})
-
--- mason-lspconfig requires that these setup functions are called in this order
--- before setting up the servers.
-require('mason').setup()
-require('mason-lspconfig').setup()
-
-
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -590,75 +536,67 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 --  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-local servers = {
-  marksman = {},
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-}
-
-if vim.fn.executable "odin" == 1 then
-  servers.ols = {}
-end
-
-if vim.fn.executable "cargo" == 1 then
-  servers.rust_analyzer = {}
-end
-
-if vim.fn.executable "zig" == 1 then
-  servers.zls = {}
-end
-
-if vim.fn.executable "java" == 1 then
-  servers.jdtls = {}
-end
+-- local servers = {
+--   marksman = {},
+--   lua_ls = {
+--     Lua = {
+--       workspace = { checkThirdParty = false },
+--       telemetry = { enable = false },
+--     },
+--   },
+-- }
+--
+-- if vim.fn.executable "odin" == 1 then
+--   servers.ols = {}
+-- end
+--
+-- if vim.fn.executable "cargo" == 1 then
+--   servers.rust_analyzer = {}
+-- end
+--
+-- if vim.fn.executable "zig" == 1 then
+--   servers.zls = {}
+-- end
+--
+-- if vim.fn.executable "java" == 1 then
+--   servers.jdtls = {}
+--   servers.kotlin_language_server = {}
+-- end
 
 if vim.fn.executable "go" == 1 then
-  servers.gopls = {
-    gopls = {
-      gofumpt = true,
-    },
+  vim.lsp.config.gopls = {
+    cmd = { 'gopls', 'serve' },
+    root_markers = { 'go.mod' },
+    filetypes = { 'go' },
   }
+  vim.lsp.enable({ 'gopls' })
 end
 
-if is_windows then
-  servers.powershell_es = {}
-end
+-- if is_windows then
+--   servers.powershell_es = {}
+-- end
+--
+-- if vim.fn.executable "node" == 1 then
+--   servers.cssls = {}
+--   servers.ts_ls = {}
+--   servers.html = {}
+-- end
 
-if vim.fn.executable "node" == 1 then
-  servers.cssls = {}
-  servers.ts_ls = {}
-  servers.html = {}
-end
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-}
 
 ---------------------------------------
 -- Autocomplete
 ---------------------------------------
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    lsp_attach(ev.buf)
+    -- FIXME nvim-cmp loswerden.
+    -- local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    -- if client:supports_method('textDocument/completion') then
+    --   vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    -- end
+  end,
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
