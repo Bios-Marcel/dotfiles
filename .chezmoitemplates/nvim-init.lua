@@ -580,6 +580,9 @@ if vim.fn.executable "go" == 1 then
     cmd = { 'gopls', 'serve' },
     root_markers = { 'go.mod' },
     filetypes = { 'go' },
+    settings = {
+      gofumpt = true,
+    },
   }
   vim.lsp.enable('gopls')
 end
@@ -704,9 +707,6 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("LspActionsOnWrite", {}),
   callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormat", {}),
       callback = function()
@@ -714,21 +714,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end,
     })
 
-    -- Pretty annoying, ill leave it out for now.
-    -- vim.api.nvim_create_autocmd("BufWritePost", {
-    --   group = vim.api.nvim_create_augroup("update_quickfixlist", {}),
-    --   callback = function()
-    --     vim.diagnostic.setqflist()
-    --   end,
-    -- })
-
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- The go language server does not organise imports on format.
     if client.name == "gopls" then
+      local bufnr = args.buf
       -- hack: Preflight async request to gopls, which can prevent blocking when save buffer on first time opened
       golang_organize_imports(bufnr, true)
 
       vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.go",
+        buffer = bufnr,
         group = vim.api.nvim_create_augroup("LspGolangOrganizeImports" .. bufnr, {}),
         callback = function()
           golang_organize_imports(bufnr)
