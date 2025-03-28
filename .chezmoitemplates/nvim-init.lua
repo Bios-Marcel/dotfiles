@@ -168,7 +168,7 @@ require('lazy').setup({
   { 'rcarriga/nvim-dap-ui' },
 
   -- Highlight selected word in visual space, not the whole file.
-  { 
+  {
     'tzachar/local-highlight.nvim',
     opts = {
       animate = {
@@ -190,10 +190,10 @@ require('lazy').setup({
     },
   },
   -- optional `vim.uv` typings
-  { "Bilal2453/luvit-meta", lazy = true },
+  { "Bilal453/luvit-meta",  lazy = true },
 
-  { 
-    'j-hui/fidget.nvim', 
+  {
+    'j-hui/fidget.nvim',
     opts = {},
   },
 
@@ -219,7 +219,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',                        opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -538,12 +538,6 @@ end
 --  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 -- local servers = {
 --   marksman = {},
---   lua_ls = {
---     Lua = {
---       workspace = { checkThirdParty = false },
---       telemetry = { enable = false },
---     },
---   },
 -- }
 --
 -- if vim.fn.executable "odin" == 1 then
@@ -563,13 +557,31 @@ end
 --   servers.kotlin_language_server = {}
 -- end
 
+vim.lsp.config.lua = {
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  settings = {
+    Lua = {
+      telemetry = { enable = false },
+      runtime = {
+        version = "LuaJIT",
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+    },
+  },
+}
+vim.lsp.enable('lua')
+
 if vim.fn.executable "go" == 1 then
   vim.lsp.config.gopls = {
     cmd = { 'gopls', 'serve' },
     root_markers = { 'go.mod' },
     filetypes = { 'go' },
   }
-  vim.lsp.enable({ 'gopls' })
+  vim.lsp.enable('gopls')
 end
 
 -- if is_windows then
