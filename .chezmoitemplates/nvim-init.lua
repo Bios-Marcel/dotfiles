@@ -190,7 +190,7 @@ require('lazy').setup({
     },
   },
   -- optional `vim.uv` typings
-  { "Bilal453/luvit-meta",  lazy = true },
+  { "Bilal2453/luvit-meta", lazy = true },
 
   {
     'j-hui/fidget.nvim',
