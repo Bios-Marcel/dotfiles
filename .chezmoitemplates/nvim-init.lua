@@ -148,7 +148,7 @@ require('lazy').setup({
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 })
       end, { remap = true })
       hop.setup()
-    end
+    end,
   },
 
   -- Detect tabstop and shiftwidth automatically
@@ -208,14 +208,10 @@ require('lazy').setup({
       })
     end,
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
-        'L3MON4D3/LuaSnip',
-        version = 'v1.*',
-      },
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
     },
+    lazy = true,
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -557,6 +553,19 @@ end
 --   servers.kotlin_language_server = {}
 -- end
 
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          -- Prevent requiring luasnip as a dependency for nvim-cmp
+          snippetSupport = false
+        },
+      },
+    },
+  },
+})
+
 vim.lsp.config.lua = {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
@@ -621,16 +630,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-luasnip.config.setup {}
 
 ---@diagnostic disable-next-line: missing-fields
 cmp.setup {
-  snippet    = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
   completion = {
     completeopt = 'noinsert',
     autocomplete = {
