@@ -566,6 +566,22 @@ vim.lsp.config('*', {
   },
 })
 
+vim.lsp.config.ts = {
+  init_options = { hostInfo = 'neovim' },
+  cmd = { 'typescript-language-server', '--stdio' },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+  },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  single_file_support = true,
+}
+vim.lsp.enable('ts')
+
 vim.lsp.config.lua = {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
