@@ -1,3 +1,5 @@
 email = "marceloschr@googlemail.com"
 font_size = 14
 font_mono = "IntoneMono Nerd Font Mono"
+gpg_signing_key = ""
+gpg_program = ""

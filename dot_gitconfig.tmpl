@@ -1,10 +1,15 @@
 [user]
 	email = {{ .email | quote }}
 	name = Marcel Schramm
+	signingkey = {{ .gpg_signing_key | quote }}
+[gpg]
+	program = {{ .gpg_program | quote }}
+[commit]
+{{ if (and (ne .gpg_signing_key "") (ne .gpg_program "")) }}	gpgsign = true{{ end }}
 [core]
 	autocrlf = input
 	eol = lf
-{{ if eq .chezmoi.os "windows" }}	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe -F {{ .chezmoi.homeDir }}/.ssh/config{{ end}}
+{{ if eq .chezmoi.os "windows" }}	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe -F {{ .chezmoi.homeDir }}/.ssh/config{{ end }}
 [branch]
 	sort = -committerdate
 [tag]
