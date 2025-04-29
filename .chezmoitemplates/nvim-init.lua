@@ -600,17 +600,23 @@ vim.lsp.config.lua = {
 }
 vim.lsp.enable('lua')
 
-if vim.fn.executable "go" == 1 then
-  vim.lsp.config.gopls = {
-    cmd = { 'gopls', 'serve' },
-    root_markers = { 'go.mod' },
-    filetypes = { 'go' },
-    settings = {
-      gofumpt = true,
-    },
-  }
-  vim.lsp.enable('gopls')
-end
+vim.lsp.config.templ = {
+  cmd = { 'templ', 'lsp' },
+  root_markers = { 'go.mod' },
+  filetypes = { 'templ' },
+}
+vim.lsp.enable('templ')
+
+vim.lsp.config.gopls = {
+  cmd = { 'gopls', 'serve' },
+  root_markers = { 'go.mod' },
+  filetypes = { 'go' },
+  settings = {
+    directory_filters = { "-.git" },
+    gofumpt = true,
+  },
+}
+vim.lsp.enable('gopls')
 
 -- if is_windows then
 --   servers.powershell_es = {}
