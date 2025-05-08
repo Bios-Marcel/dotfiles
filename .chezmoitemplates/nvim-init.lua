@@ -125,29 +125,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Theme
   { 'catppuccin/nvim' },
+
+  -- Jump to character
   {
     'smoka7/hop.nvim',
     version = "*",
-    opts = {},
+    lazy = true,
     config = function()
-      local hop = require('hop')
-      local directions = require('hop.hint').HintDirection
-
-      -- We only bind this to normal mode for now, as I don't want to affect
-      -- actions such as delete.
-      vim.keymap.set('n', 'f', function()
-        hop.hint_char1({ direction = directions.AFTER_CURSOR })
-      end, { remap = true })
-      vim.keymap.set('n', 'F', function()
-        hop.hint_char1({ direction = directions.BEFORE_CURSOR })
-      end, { remap = true })
-      vim.keymap.set('n', 't', function()
-        hop.hint_char1({ direction = directions.AFTER_CURSOR, hint_offset = -1 })
-      end, { remap = true })
-      vim.keymap.set('n', 'T', function()
-        hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 })
-      end, { remap = true })
-      hop.setup()
+      require('hop').setup()
     end,
   },
 
@@ -253,6 +238,33 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 })
+
+-- We only bind this to normal mode for now, as I don't want to affect
+-- actions such as delete.
+vim.keymap.set('n', 'f', function()
+  local hop = require('hop')
+  local directions = require('hop.hint').HintDirection
+
+  hop.hint_char1({ direction = directions.AFTER_CURSOR })
+end, { remap = true })
+vim.keymap.set('n', 'F', function()
+  local hop = require('hop')
+  local directions = require('hop.hint').HintDirection
+
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR })
+end, { remap = true })
+vim.keymap.set('n', 't', function()
+  local hop = require('hop')
+  local directions = require('hop.hint').HintDirection
+
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, hint_offset = -1 })
+end, { remap = true })
+vim.keymap.set('n', 'T', function()
+  local hop = require('hop')
+  local directions = require('hop.hint').HintDirection
+
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 })
+end, { remap = true })
 
 ---------------------------------------
 -- Plugins end
