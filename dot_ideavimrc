@@ -40,6 +40,8 @@ nmap <leader>ds <Action>(FileStructurePopup)
 
 nmap <leader>rn <Action>(RenameElement)
 nmap <leader>cs <Action>(ChangeSignature)
+vmap <leader>ef <Action>(IntroduceField)
+nmap <leader>ef <Action>(IntroduceField)
 vmap <leader>ec <Action>(IntroduceConstant)
 nmap <leader>ec <Action>(IntroduceConstant)
 vmap <leader>ev <Action>(IntroduceVariable)
