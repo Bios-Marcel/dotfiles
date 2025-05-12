@@ -177,6 +177,7 @@ require('lazy').setup({
   -- optional `vim.uv` typings
   { "Bilal2453/luvit-meta", lazy = true },
 
+  -- LSP progress notifications
   {
     'j-hui/fidget.nvim',
     opts = {},
@@ -196,7 +197,6 @@ require('lazy').setup({
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
     },
-    lazy = true,
   },
 
   -- Useful plugin to show you pending keybinds.
