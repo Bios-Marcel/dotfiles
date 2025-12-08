@@ -56,7 +56,7 @@ scoop install idea visualvm openjdk21 openjdk22
 scoop install spotify sharex presenterm
 
 # Config only for work
-if ("$env:COMPUTERNAME" -eq "NB-00724")
+if ("$env:COMPUTERNAME" -eq "NB-00715")
 {
 	[Environment]::SetEnvironmentVariable('HOME','C:\Users\Schramm',[System.EnvironmentVariableTarget]::User)
 
