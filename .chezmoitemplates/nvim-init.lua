@@ -388,7 +388,7 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 local find_files = function()
-  require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--no-ignore-vcs', '--hidden', '-g', '!.git' } })
+  require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '--no-ignore-vcs', '--hidden', '-g', '!.git', '-g', '!.svn' } })
 end
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
