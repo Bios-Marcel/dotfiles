@@ -1,0 +1,21 @@
+Host github.com
+    Hostname github.com
+    # While not the same key everywhere, i always use the same name
+    IdentityFile ~/.ssh/github
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+
+{{ if .private -}}
+# Name in my Network, also available via tailscale
+Host server
+    Hostname server
+    User server
+    IdentityFile ~/.ssh/github_framework
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+    # Required to prevent unknown terminfo issues, for example with ghostty
+    SetEnv TERM=xterm-256color
+{{- end -}}
+
+{{ includeTemplate "include_opt" "~/.config/chezmoi/includes/ssh_config" -}}
+
