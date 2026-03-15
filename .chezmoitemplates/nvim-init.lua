@@ -418,7 +418,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
   ---@diagnostic disable-next-line: missing-fields
-  require('nvim-treesitter.configs').setup {
+  require('nvim-treesitter.config').setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'go', 'lua', 'rust', 'tsx', 'html', 'css', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
