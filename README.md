@@ -36,3 +36,14 @@ Default data is saved in [.chezmoi.toml](/.chezmoidata.toml). Override it with
 
 TODO
 
+### Util templates
+
+Templates defines in `.chezmoitemplates` can be called via `includeTemplate`,
+such as:
+
+```
+{{ includeTemplate "include_opt" "~/.config/chezmoi/includes/ssh_config"}}
+```
+
+Where `include_opt` is the name of the template file.
+
